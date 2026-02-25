@@ -1,0 +1,22 @@
+[
+{
+"id":1,
+"title":"Responsive Login Page",
+"steps":[
+"Create HTML form",
+"Add CSS styling",
+"Make mobile responsive",
+"Test layout"
+]
+},
+{
+"id":2,
+"title":"REST API Endpoint",
+"steps":[
+"Install express",
+"Create endpoint",
+"Return JSON",
+"Test API"
+]
+}
+]
