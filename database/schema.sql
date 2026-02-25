@@ -1,58 +1,35 @@
-
 CREATE TABLE users(
 
-id SERIAL PRIMARY KEY,
-
+id TEXT PRIMARY KEY,
+name TEXT,
 email TEXT,
-
-password TEXT,
-
-role TEXT,
-
-points INT DEFAULT 0
-
+credits INTEGER
 );
-
-
 
 CREATE TABLE tasks(
 
-id SERIAL PRIMARY KEY,
-
+id INTEGER PRIMARY KEY,
 title TEXT,
-
 description TEXT,
-
-coach_id INT
-
+price INTEGER
 );
-
-
 
 CREATE TABLE steps(
 
-id SERIAL PRIMARY KEY,
-
-task_id INT,
-
-step_number INT,
-
-price INT,
-
-instructions TEXT,
-
-video_url TEXT
-
+id INTEGER PRIMARY KEY,
+taskId INTEGER,
+content TEXT
 );
 
+CREATE TABLE unlocks(
 
-
-CREATE TABLE purchases(
-
-id SERIAL PRIMARY KEY,
-
-user_id INT,
-
-step_id INT
-
+userId TEXT,
+taskId INTEGER
 );
+
+CREATE TABLE coaches(
+
+userId TEXT,
+bio TEXT
+);
+
