@@ -1,6 +1,5 @@
 
-let userId=null;
-
+let token="";
 
 function register(){
 
@@ -9,29 +8,29 @@ fetch("http://localhost:3000/register",{
 method:"POST",
 
 headers:{
+
 "Content-Type":"application/json"
+
 },
 
 body:JSON.stringify({
-name:document.getElementById("name").value
+
+name:name.value,
+email:email.value
+
 })
 
 })
 .then(r=>r.json())
-.then(user=>{
+.then(d=>{
 
-userId=user.id;
+token=d.token;
 
-document.getElementById("login").style.display="none";
-
-document.getElementById("dashboard").style.display="block";
-
-loadTasks();
+window.location="dashboard.html";
 
 });
 
 }
-
 
 
 function loadTasks(){
@@ -46,17 +45,15 @@ tasks.forEach(t=>{
 
 html+=`
 
-<div class="task">
+<div>
 
-<h3>${t.title}</h3>
+${t.title}
 
-<button onclick="unlock(${t.id})">
+<button onclick="loadSteps(${t.id})">
 
-Unlock Steps (5 credits)
+Learn
 
 </button>
-
-<div id="task${t.id}"></div>
 
 </div>
 
@@ -64,55 +61,41 @@ Unlock Steps (5 credits)
 
 });
 
-document.getElementById("tasks").innerHTML=html;
+tasksDiv.innerHTML=html;
 
 });
+
 }
 
 
+function loadSteps(id){
 
-function unlock(taskId){
+fetch(
+"http://localhost:3000/steps/"+id,
 
-fetch("http://localhost:3000/unlock",{
-
-method:"POST",
-
+{
 headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-userId,
-taskId
-})
-
-})
-.then(()=>showSteps(taskId));
-
+Authorization:token
+}
 }
 
-
-
-function showSteps(taskId){
-
-fetch("http://localhost:3000/tasks")
+)
 .then(r=>r.json())
-.then(tasks=>{
-
-let task=tasks.find(t=>t.id==taskId);
+.then(steps=>{
 
 let html="<ul>";
 
-task.steps.forEach(s=>{
+steps.forEach(s=>{
 
-html+=`<li>${s}</li>`;
+html+=`<li>${s.content}</li>`;
 
 });
 
 html+="</ul>";
 
-document.getElementById("task"+taskId).innerHTML=html;
+tasksDiv.innerHTML=html;
 
 });
 
 }
+
