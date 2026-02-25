@@ -1,12 +1,12 @@
 {
-  "name": "horsepacer-backend",
-  "version": "1.0.0",
-  "description": "HORSE Pacer Coaching Platform",
-  "main": "server.js",
+  "name": "horsepacer",
+  "version": "2.0",
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "body-parser": "^1.20.2",
-    "uuid": "^9.0.0"
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "stripe": "^14.0.0"
   }
 }
